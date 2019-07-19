@@ -7,11 +7,19 @@
  * 
  * Project: https://github.com/ghison/state
  * First Release Date: 2019-05-09
- * Last Update: 2019-07-13
- * Version: 0.3.1 , Not an stable version and under change
+ * Last Update: 2019-07-19
+ * Version: 0.3.3 , Not an stable version and under change
  * 
  * Description:
- *    State machine manager for non-linear programming, simple and efficient.
+ *    State machine manager to use in application such as 
+ *      repeatitive non-sequential tasks,
+ *      communication, 
+ *      IoT, 
+ *      controlling, 
+ *      protocol handling, 
+ *      robotices,
+ * 
+ *    try to keep this simple and efficient.
  * 
  */
 
@@ -23,11 +31,50 @@ class GhisonState {
      */
     constructor(states) {
         this.states = states;
-        this.global = this.states.global;
-        this.current = this.states.startState;
+
+        if (states.global) {
+            this.global = states.global;
+        }
+        else {
+            this.global = {};
+        }
+        /* WORKHERE: BGH @2019-07-18 - remove global from states (just for safety) */
+
+        if (this.global.idleState) {
+            this.current = this.global.idleState;
+        }
+        else if (states.idle) {
+            this.global.idleState = 'idle';
+            this.current = 'idle';
+        }
+        else {
+            this.current = null;
+        }
+
+        if (this.global.startState) {
+            this.start = this.global.startState;
+        }
+        else if (states.start) {
+            this.global.startState = 'start';
+            this.start = 'start';
+        }
+        else {
+            this.start = null;
+        }
+
         this.prevState = undefined; 
-        this.firstTime = true;
-        this.change(this.current);
+        this.firstTime = true;        
+
+        if (this.current)
+            this.change(this.current);
+        }
+    }
+
+    destruct() {
+        clearTimeout(this.stateTimeout);
+        clearTimeout(this.repeatEnterTimeout);
+        clearTimeout(this.repeatTimeout);
+        clearTimeout(this.global.busyTimer);
     }
 
     /**
@@ -165,10 +212,24 @@ class GhisonState {
         // }
         this.prevState = this.current;
     }
-
+    
     /**
      * 
-     * @param {*} state 
+     * @param {String} state 
+     */
+    start(state) {
+        if (!this.busy) {
+            if (state) {
+                this.change(state);
+            }
+            else if (this.start) {
+                this.change(this.start);
+            }
+        }
+    }
+    /**
+     * 
+     * @param {String} state 
      */
     is(state) {        
         return (state.toUpperCase() === this.current.toUpperCase()); 

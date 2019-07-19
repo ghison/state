@@ -1,6 +1,18 @@
 # Ghison State
 
-State Machine handler engine from scratch
+State Machine handler engine from scratch (V0.3.3)
+
+to use in application such as 
+* repeatitive non-sequential tasks,
+* communication, 
+* IoT, 
+* controlling, 
+* protocol handling, 
+* robotices,
+
+try to keep this simple and efficient.
+
+the documentation is not completed as the software is under develop and changes. 
 
 ## Getting Started
 
@@ -51,9 +63,9 @@ We try to use [SemVer](http://semver.org/) for versioning. For the versions avai
 ## Authors
 
 * **Beman Ghison (Behnam Ghiaseddin)** - *Initial work* - [Ghison-State](https://github.com/ghison/state)
-
+beman.ghison@gmail.com(beman.ghison@gmail.com)
 
 ## License
 
-This project is licensed under the GPL License - see the [LICENSE.md](LICENSE.md) file for details
-
+This software is free to use for any non-commercial application.
+For commercial application there is a little fee. you can contact me about it.
