@@ -8,7 +8,7 @@
  * Project: https://github.com/ghison/state
  * First Release Date: 2019-05-09
  * Last Update: 2019-07-19
- * Version: 0.3.3 , Not an stable version and under change
+ * Version: 0.3.4 , Not an stable version and under change
  * 
  * Description:
  *    State machine manager to use in application such as 
@@ -19,8 +19,10 @@
  *      protocol handling, 
  *      robotices,
  * 
- *    try to keep this simple and efficient.
+ *    this library try to be simple and efficient.
  * 
+ *    This software is free to use for any non-commercial application.
+ *    For commercial application there is a little fee. you can contact me about it.
  */
 
 
@@ -65,7 +67,7 @@ class GhisonState {
         this.prevState = undefined; 
         this.firstTime = true;        
 
-        if (this.current)
+        if (this.current) {
             this.change(this.current);
         }
     }

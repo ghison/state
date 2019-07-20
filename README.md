@@ -1,6 +1,6 @@
 # Ghison State
 
-State Machine handler engine from scratch (V0.3.3)
+State Machine handler engine from scratch (V0.3.4)
 
 to use in application such as 
 * repeatitive non-sequential tasks,
